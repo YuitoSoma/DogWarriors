@@ -10,18 +10,23 @@ public class PlayerManager : MonoBehaviour
     public Collider weaponCollider;
     public PlayerUIManager playerUIManager;
     public GameObject gameOverText;
+    public Transform target;
 
     float x;
     float z;
     public float moveSpeed;
-    public int maxHp = 10;
+    public int maxHp;
     int hp;
+    public int maxStamina;
+    int stamina;
+
     bool isDie;
 
     // Update関数の前に一度だけ実行される：設定
     void Start()
     {
         hp = maxHp;
+        stamina = maxStamina;
         playerUIManager.Init(this);
 
         rb = GetComponent < Rigidbody>();
@@ -43,7 +48,41 @@ public class PlayerManager : MonoBehaviour
         // 攻撃入力
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Attack();
+        }
+
+        Increase();
+    }
+
+    void Increase()
+    {
+        stamina++;
+
+        if (stamina > maxStamina)
+        {
+            stamina = maxStamina;
+        }
+
+        playerUIManager.UpdateStamina(stamina);
+    }
+
+    void Attack()
+    {
+        if (stamina >= 40)
+        {
+            stamina -= 40;
+            playerUIManager.UpdateStamina(stamina);
+            LookAtTarget();
             animator.SetTrigger("Attack");
+        }
+    }
+
+    void LookAtTarget()
+    {
+        float distance = Vector3.Distance(transform.position, target.position);
+        if (distance <= 2.0f)
+        {
+            transform.LookAt(target);
         }
     }
 
@@ -87,8 +126,8 @@ public class PlayerManager : MonoBehaviour
             isDie = true;
             animator.SetTrigger("Die");
             gameOverText.SetActive(true);
+            rb.velocity = Vector3.zero;
         }
-        Debug.Log("残りHP:" + hp);
 
         playerUIManager.UpdateHP(hp);
     }

@@ -12,7 +12,7 @@ public class EnemyManager : MonoBehaviour
     public EnemyUIManager enemyUIManager;
     public GameObject gameClearText;
 
-    public int maxHp = 100;
+    public int maxHp;
     int hp;
 
     void Start()
@@ -30,6 +30,11 @@ public class EnemyManager : MonoBehaviour
     {
         agent.destination = target.position * 0.5f;
         animator.SetFloat("Distance", agent.remainingDistance);
+    }
+
+    public void LookAtTarget()
+    {
+        transform.LookAt(target);
     }
 
     // •Ší‚Ì”»’è‚ğ—LŒø‚É‚µ‚½‚èEÁ‚µ‚½‚è‚·‚éŠÖ”
@@ -53,7 +58,6 @@ public class EnemyManager : MonoBehaviour
             Destroy(gameObject, 2.0f);
             gameClearText.SetActive(true);
         }
-        Debug.Log("c‚èHP:" + hp);
         enemyUIManager.UpdateHP(hp);
     }
 
