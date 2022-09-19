@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     // Update関数の前に一度だけ実行される：設定
     void Start()
     {
+        EnemyManager.counter = 0;
         hp = maxHp;
         stamina = maxStamina;
         playerUIManager.Init(this);
@@ -72,19 +73,19 @@ public class PlayerManager : MonoBehaviour
         {
             stamina -= 40;
             playerUIManager.UpdateStamina(stamina);
-            LookAtTarget();
+            //LookAtTarget();
             animator.SetTrigger("Attack");
         }
     }
 
-    void LookAtTarget()
-    {
-        float distance = Vector3.Distance(transform.position, target.position);
-        if (distance <= 2.0f)
-        {
-            transform.LookAt(target);
-        }
-    }
+    //void LookAtTarget()
+    //{
+    //  float distance = Vector3.Distance(transform.position, target.position);
+    //if (distance <= 2.0f)
+    //{
+    //  transform.LookAt(target);
+    //}
+    //}
 
     private void FixedUpdate()
     {
@@ -127,6 +128,8 @@ public class PlayerManager : MonoBehaviour
             animator.SetTrigger("Die");
             gameOverText.SetActive(true);
             rb.velocity = Vector3.zero;
+            
+            SceneManager.LoadScene("TitleScene");
         }
 
         playerUIManager.UpdateHP(hp);

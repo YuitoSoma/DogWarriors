@@ -2,26 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
-    public Transform target;
+    Transform target;
     NavMeshAgent agent;
     Animator animator;
-    public Collider weaponCollider;
-    public EnemyUIManager enemyUIManager;
-    public GameObject gameClearText;
+    EnemyResponcer enemyResponcer;
+    Collider axeCollider;
+    Collider swordCollider;
+    Collider enemyCollider;
+    EnemyUIManager enemyUIManager;
+    GameObject gameClearText;
 
-    public int maxHp;
+    public static int counter;
+    public int maxHp = 50;
     int hp;
 
     void Start()
     {
-        hp = maxHp;
-        enemyUIManager.Init(this);
-
+        target = GameObject.Find("Player").transform;
+        enemyResponcer = GameObject.Find("SceneManager").GetComponent<EnemyResponcer>();
+        axeCollider = GameObject.Find("Axe").GetComponent<BoxCollider>();
+        swordCollider = GameObject.Find("SwordPolyart").GetComponent<MeshCollider>();
+        enemyUIManager = transform.Find("EnemyUICanvas").gameObject.GetComponent<EnemyUIManager>();
+        gameClearText = GameObject.Find("GameClearText");
+        enemyCollider = GetComponent<CapsuleCollider>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+
+        hp = maxHp;
+        enemyUIManager.Init(this);
         agent.destination = target.position;
         HideColliderWeapon();
     }
@@ -30,6 +42,7 @@ public class EnemyManager : MonoBehaviour
     {
         agent.destination = target.position * 0.5f;
         animator.SetFloat("Distance", agent.remainingDistance);
+        LookAtTarget();
     }
 
     public void LookAtTarget()
@@ -40,25 +53,36 @@ public class EnemyManager : MonoBehaviour
     // ïêäÌÇÃîªíËÇóLå¯Ç…ÇµÇΩÇËÅEè¡ÇµÇΩÇËÇ∑ÇÈä÷êî
     public void HideColliderWeapon()
     {
-        weaponCollider.enabled = false;
+        axeCollider.enabled = false;
     }
 
     public void ShowColliderWeapon()
     {
-        weaponCollider.enabled = true;
+        axeCollider.enabled = true;
+    }
+
+    public void EnemyCollider()
+    {
+        enemyCollider.enabled = false;
+    }
+
+    public void EnemyActive()
+    {
+        gameObject.SetActive(false);
     }
 
     void Damage(int damage)
     {
         hp -= damage;
-        if (hp <= 0)
+        Debug.Log("HPÅF" + hp);
+        enemyUIManager.UpdateHP(hp);
+        if (hp < 1)
         {
+            counter++;
             hp = 0;
             animator.SetTrigger("Die");
-            Destroy(gameObject, 2.0f);
-            gameClearText.SetActive(true);
+            enemyResponcer.Responce();
         }
-        enemyUIManager.UpdateHP(hp);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,8 +90,11 @@ public class EnemyManager : MonoBehaviour
         Damager damager = other.GetComponent<Damager>();
         if (damager != null)
         {
-            animator.SetTrigger("Hurt");
-            Damage(damager.damage);
+            if (other == swordCollider)
+            {
+                animator.SetTrigger("Hurt");
+                Damage(damager.damage);
+            }
         }
     }
 }
