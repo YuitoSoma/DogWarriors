@@ -65,7 +65,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (stamina >= 20)
         {
-            stamina -= 20;
+            stamina -= 10;
             playerUIManager.UpdateStamina(stamina);
             LookAtTarget();
             animator.SetTrigger("Attack");

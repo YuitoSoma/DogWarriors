@@ -14,6 +14,7 @@ public class EnemyManager : MonoBehaviour
     Collider swordCollider;
     Collider enemyCollider;
     EnemyUIManager enemyUIManager;
+    public GameObject healItem;
 
     public static int counter;
     public int maxHp = 50;
@@ -79,7 +80,7 @@ public class EnemyManager : MonoBehaviour
             hp = 0;
             animator.SetTrigger("Die");
             battleSceneManager.EnemyResponce();
-            battleSceneManager.HealItemResponce();
+            Instantiate(healItem, gameObject.transform.position, Quaternion.identity);
         }
     }
 
