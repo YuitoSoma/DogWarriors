@@ -19,11 +19,11 @@ public class PlayerUIManager : MonoBehaviour
 
     public void UpdateHP(int hp)
     {
-        hpSlider.DOValue(hp, 0.5f);
+        hpSlider.DOValue(hp, 0.6f);
     }
 
     public void UpdateStamina(int stamina)
     {
-        staminaSlider.DOValue(stamina, 0.5f);
+        staminaSlider.DOValue(stamina, 0.3f);
     }
 }

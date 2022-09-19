@@ -87,12 +87,10 @@ public class EnemyManager : MonoBehaviour
     {
         Damager damager = other.GetComponent<Damager>();
         if (damager != null)
-        {
             if (other == swordCollider)
             {
                 animator.SetTrigger("Hurt");
                 Damage(damager.damage);
             }
-        }
     }
 }

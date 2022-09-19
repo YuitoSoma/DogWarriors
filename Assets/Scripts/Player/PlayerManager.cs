@@ -41,18 +41,14 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         if (isDie)
-        {
             return;
-        }
         // キーボード入力移動させたい
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 
         // 攻撃入力
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             Attack();
-        }
 
         Increase();
     }
@@ -60,45 +56,35 @@ public class PlayerManager : MonoBehaviour
     void Increase()
     {
         stamina++;
-
         if (stamina > maxStamina)
-        {
             stamina = maxStamina;
-        }
-
         playerUIManager.UpdateStamina(stamina);
     }
 
     void Attack()
     {
-        if (stamina >= 40)
+        if (stamina >= 20)
         {
-            stamina -= 40;
+            stamina -= 20;
             playerUIManager.UpdateStamina(stamina);
-            //LookAtTarget();
+            LookAtTarget();
             animator.SetTrigger("Attack");
         }
     }
 
-    //void LookAtTarget()
-    //{
-    //  float distance = Vector3.Distance(transform.position, target.position);
-    //if (distance <= 2.0f)
-    //{
-    //  transform.LookAt(target);
-    //}
-    //}
+    void LookAtTarget()
+    {
+        float distance = Vector3.Distance(transform.position, target.position);
+        if (distance <= 2.0f)
+            transform.LookAt(target);
+    }
 
     private void FixedUpdate()
     {
         if (isDie)
-        {
             return;
-        }
-
         Vector3 direction = transform.position + new Vector3(x, 0, z);
         transform.LookAt(direction);
-
         // 速度設定
         rb.velocity = new Vector3(x, 0, z) * moveSpeed;
         animator.SetFloat("Speed", rb.velocity.magnitude);
@@ -118,10 +104,7 @@ public class PlayerManager : MonoBehaviour
     void Damage(int damage)
     {
         if (isDie)
-        {
             return;
-        }
-
         hp -= damage;
         if (hp <= 0)
         {
@@ -129,10 +112,8 @@ public class PlayerManager : MonoBehaviour
             isDie = true;
             animator.SetTrigger("Die");
             rb.velocity = Vector3.zero;
-            
             SceneManager.LoadScene("TitleScene");
         }
-
         playerUIManager.UpdateHP(hp);
     }
 
@@ -142,24 +123,19 @@ public class PlayerManager : MonoBehaviour
         if (hp + heal <= maxHp)
         {
             hp += heal;
-            Debug.Log("HP：" + hp);
         }
         // hpが50より大きい場合はmaxHpにする
         else
         {
             hp = maxHp;
         }
-
         playerUIManager.UpdateHP(hp);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (isDie)
-        {
             return;
-        }
-
         Healer healer = other.GetComponent<Healer>();
         if (healer != null)
         {
