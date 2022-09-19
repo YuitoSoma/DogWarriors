@@ -135,10 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c00e06c36633f4f9e2c79dd0e621be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponCollider: {fileID: 3532422171329246968}
-  playerUIManager: {fileID: 1661738123}
-  gameOverText: {fileID: 1445730246}
-  target: {fileID: 2095788672673005541, guid: d0308de0950b1674185bdbce019d3956, type: 3}
   moveSpeed: 3
   maxHp: 100
   maxStamina: 100
@@ -393,9 +389,8 @@ GameObject:
   m_Component:
   - component: {fileID: 875248917}
   - component: {fileID: 875248916}
-  - component: {fileID: 875248918}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: BattleSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,6 +409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 2095788672673004571, guid: d0308de0950b1674185bdbce019d3956, type: 3}
+  healItem: {fileID: 3322923689548010600, guid: d446e58d099e53f44b4fc0bd708d6a21, type: 3}
+  scoreText: {fileID: 1365735737}
 --- !u!4 &875248917
 Transform:
   m_ObjectHideFlags: 0
@@ -429,19 +426,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &875248918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875248915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5739791198917948908e90329f59d85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 1365735737}
 --- !u!1 &920971867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,7 +1630,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!64 &1788642159
 MeshCollider:

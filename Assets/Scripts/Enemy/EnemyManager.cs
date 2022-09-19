@@ -9,12 +9,11 @@ public class EnemyManager : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     Animator animator;
-    EnemyResponcer enemyResponcer;
+    BattleSceneManager battleSceneManager;
     Collider axeCollider;
     Collider swordCollider;
     Collider enemyCollider;
     EnemyUIManager enemyUIManager;
-    GameObject gameClearText;
 
     public static int counter;
     public int maxHp = 50;
@@ -23,11 +22,10 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player").transform;
-        enemyResponcer = GameObject.Find("SceneManager").GetComponent<EnemyResponcer>();
+        battleSceneManager = GameObject.Find("BattleSceneManager").GetComponent<BattleSceneManager>();
         axeCollider = GameObject.Find("Axe").GetComponent<BoxCollider>();
         swordCollider = GameObject.Find("SwordPolyart").GetComponent<MeshCollider>();
         enemyUIManager = transform.Find("EnemyUICanvas").gameObject.GetComponent<EnemyUIManager>();
-        gameClearText = GameObject.Find("GameClearText");
         enemyCollider = GetComponent<CapsuleCollider>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -40,7 +38,7 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        agent.destination = target.position * 0.5f;
+        agent.destination = target.position;
         animator.SetFloat("Distance", agent.remainingDistance);
         LookAtTarget();
     }
@@ -74,14 +72,14 @@ public class EnemyManager : MonoBehaviour
     void Damage(int damage)
     {
         hp -= damage;
-        Debug.Log("HPÅF" + hp);
         enemyUIManager.UpdateHP(hp);
         if (hp < 1)
         {
             counter++;
             hp = 0;
             animator.SetTrigger("Die");
-            enemyResponcer.Responce();
+            battleSceneManager.EnemyResponce();
+            battleSceneManager.HealItemResponce();
         }
     }
 

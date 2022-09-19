@@ -7,10 +7,9 @@ public class PlayerManager : MonoBehaviour
 {
     Animator animator;
     Rigidbody rb;
-    public Collider weaponCollider;
-    public PlayerUIManager playerUIManager;
-    public GameObject gameOverText;
-    public Transform target;
+    Collider swordCollider;
+    PlayerUIManager playerUIManager;
+    Transform target;
 
     float x;
     float z;
@@ -25,13 +24,16 @@ public class PlayerManager : MonoBehaviour
     // Update関数の前に一度だけ実行される：設定
     void Start()
     {
+        swordCollider = GameObject.Find("SwordPolyart").GetComponent<MeshCollider>();
+        playerUIManager = GameObject.Find("PlayerUICanvas").GetComponent<PlayerUIManager>();
+        target = GameObject.Find("Enemy").GetComponent<Transform>();
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+
         EnemyManager.counter = 0;
         hp = maxHp;
         stamina = maxStamina;
         playerUIManager.Init(this);
-
-        rb = GetComponent < Rigidbody>();
-        animator = GetComponent<Animator>();
         HideColliderWeapon();
     }
 
@@ -105,12 +107,12 @@ public class PlayerManager : MonoBehaviour
     // 武器の判定を有効にしたり・消したりする関数
     public void HideColliderWeapon()
     {
-        weaponCollider.enabled = false;
+        swordCollider.enabled = false;
     }
 
     public void ShowColliderWeapon()
     {
-        weaponCollider.enabled = true;
+        swordCollider.enabled = true;
     }
 
     void Damage(int damage)
@@ -126,10 +128,26 @@ public class PlayerManager : MonoBehaviour
             hp = 0;
             isDie = true;
             animator.SetTrigger("Die");
-            gameOverText.SetActive(true);
             rb.velocity = Vector3.zero;
             
             SceneManager.LoadScene("TitleScene");
+        }
+
+        playerUIManager.UpdateHP(hp);
+    }
+
+    void Heal(int heal)
+    {
+        // hpとhealを足した数値がmaxHp以下の場合，回復する．
+        if (hp + heal <= maxHp)
+        {
+            hp += heal;
+            Debug.Log("HP：" + hp);
+        }
+        // hpが50より大きい場合はmaxHpにする
+        else
+        {
+            hp = maxHp;
         }
 
         playerUIManager.UpdateHP(hp);
@@ -140,6 +158,13 @@ public class PlayerManager : MonoBehaviour
         if (isDie)
         {
             return;
+        }
+
+        Healer healer = other.GetComponent<Healer>();
+        if (healer != null)
+        {
+            Heal(healer.heal);
+            healer.gameObject.SetActive(false);
         }
 
         Damager damager = other.GetComponent<Damager>();
