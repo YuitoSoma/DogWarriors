@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField]
+    [Tooltip("発生させるエフェクト(パーティクル)")]
+    ParticleSystem particle;
     Transform target;
     NavMeshAgent agent;
     Animator animator;
@@ -14,6 +16,7 @@ public class EnemyManager : MonoBehaviour
     Collider swordCollider;
     Collider enemyCollider;
     EnemyUIManager enemyUIManager;
+    AudioSource swordSound;
     public GameObject healItem;
 
     public static int counter;
@@ -84,12 +87,17 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         Damager damager = other.GetComponent<Damager>();
         if (damager != null)
             if (other == swordCollider)
             {
+                ParticleSystem newParticle = Instantiate(particle);                             // パーティクルシステムのインスタンスを生成する。
+                newParticle.transform.position = this.transform.position;                       // パーティクルの発生場所をこのスクリプトをアタッチしているGameObjectの場所にする。
+                newParticle.Play();
+                Destroy(newParticle.gameObject, 1.0f);
+
                 animator.SetTrigger("Hurt");
                 Damage(damager.damage);
             }

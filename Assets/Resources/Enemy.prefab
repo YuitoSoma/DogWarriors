@@ -236,7 +236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46288cc5685a9664ea00f956a4c07f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healItem: {fileID: 3322923689548010600, guid: d446e58d099e53f44b4fc0bd708d6a21, type: 3}
+  particle: {fileID: 198175801688348628, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
+  healItem: {fileID: 3322923689548010600, guid: d446e58d099e53f44b4fc0bd708d6a21,
+    type: 3}
   maxHp: 30
 --- !u!136 &2095788672673004575
 CapsuleCollider:

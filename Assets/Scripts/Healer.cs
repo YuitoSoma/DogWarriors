@@ -5,4 +5,15 @@ using UnityEngine;
 public class Healer : MonoBehaviour
 {
     public int heal = 50;
+    AudioSource healSound;
+
+    void Start()
+    {
+        healSound = GetComponent<AudioSource>();
+    }
+
+    public void SoundPlay()
+    {
+        healSound.Play();
+    }
 }

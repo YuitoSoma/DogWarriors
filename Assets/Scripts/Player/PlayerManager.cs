@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     Collider swordCollider;
     PlayerUIManager playerUIManager;
     Transform target;
+    AudioSource swordSound;
 
     float x;
     float z;
@@ -24,7 +25,9 @@ public class PlayerManager : MonoBehaviour
     // Update関数の前に一度だけ実行される：設定
     void Start()
     {
-        swordCollider = GameObject.Find("SwordPolyart").GetComponent<MeshCollider>();
+        GameObject swordObject = GameObject.Find("SwordPolyart");
+        swordCollider = swordObject.GetComponent<MeshCollider>();
+        swordSound = swordObject.GetComponent<AudioSource>();
         playerUIManager = GameObject.Find("PlayerUICanvas").GetComponent<PlayerUIManager>();
         target = GameObject.Find("Enemy").GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
@@ -98,6 +101,7 @@ public class PlayerManager : MonoBehaviour
 
     public void ShowColliderWeapon()
     {
+        swordSound.Play();
         swordCollider.enabled = true;
     }
 
@@ -129,6 +133,7 @@ public class PlayerManager : MonoBehaviour
         {
             hp = maxHp;
         }
+        
         playerUIManager.UpdateHP(hp);
     }
 
@@ -140,6 +145,7 @@ public class PlayerManager : MonoBehaviour
         if (healer != null)
         {
             Heal(healer.heal);
+            healer.SoundPlay();
             healer.gameObject.SetActive(false);
         }
 
