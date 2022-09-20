@@ -3,18 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class TimeCounter : MonoBehaviour
 {
+    public GameObject finishPanel;
     public int countdownMinutes = 3;
     float countdownSeconds;
     Text timeText;
 
-    private void Start()
+    void Start()
     {
         timeText = GetComponent<Text>();
         countdownSeconds = countdownMinutes * 60;
+        finishPanel.SetActive(false);
     }
 
     void Update()
@@ -26,7 +27,7 @@ public class TimeCounter : MonoBehaviour
         if (countdownSeconds <= 0)
         {
             // 0•b‚É‚È‚Á‚½‚Æ‚«‚Ìˆ—
-            SceneManager.LoadScene("TitleScene");
+            finishPanel.SetActive(true);
         }
     }
 }

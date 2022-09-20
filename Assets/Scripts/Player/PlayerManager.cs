@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -11,6 +10,8 @@ public class PlayerManager : MonoBehaviour
     PlayerUIManager playerUIManager;
     Transform target;
     AudioSource swordSound;
+
+    public GameObject finishPanel;
 
     float x;
     float z;
@@ -116,7 +117,7 @@ public class PlayerManager : MonoBehaviour
             isDie = true;
             animator.SetTrigger("Die");
             rb.velocity = Vector3.zero;
-            SceneManager.LoadScene("TitleScene");
+            finishPanel.SetActive(true);
         }
         playerUIManager.UpdateHP(hp);
     }
@@ -145,7 +146,6 @@ public class PlayerManager : MonoBehaviour
         if (healer != null)
         {
             Heal(healer.heal);
-            healer.SoundPlay();
             healer.gameObject.SetActive(false);
         }
 

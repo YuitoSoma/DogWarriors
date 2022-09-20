@@ -5,6 +5,7 @@ using UnityEngine;
 public class Healer : MonoBehaviour
 {
     public int heal = 50;
+    public Collider playerCollider;
     AudioSource healSound;
 
     void Start()
@@ -12,8 +13,9 @@ public class Healer : MonoBehaviour
         healSound = GetComponent<AudioSource>();
     }
 
-    public void SoundPlay()
+    private void OnTriggerEnter(Collider other)
     {
-        healSound.Play();
+        if (other == playerCollider)
+            healSound.Play();
     }
 }

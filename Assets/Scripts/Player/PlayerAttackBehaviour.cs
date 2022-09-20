@@ -12,10 +12,10 @@ public class PlayerAttackBehaviour : StateMachineBehaviour
     }
 
     // アニメーション中に実行される：Update関数のようなもの
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
-    }
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // アニメーションの遷移が行われる時
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

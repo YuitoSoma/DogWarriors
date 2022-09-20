@@ -185,8 +185,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3725489
-  m_Center: {x: 0, y: 1.0304341, z: 0}
+  m_Radius: 0.28595456
+  m_Center: {x: 0, y: 1.0304341, z: 0.08659434}
 --- !u!114 &406399966256168991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 50
+  playerCollider: {fileID: 8884045600388785879, guid: f4c141800483d664d9302ee128fb9344,
+    type: 3}
 --- !u!82 &8890693070466325510
 AudioSource:
   m_ObjectHideFlags: 0
