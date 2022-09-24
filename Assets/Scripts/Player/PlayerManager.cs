@@ -20,13 +20,14 @@ public class PlayerManager : MonoBehaviour
     int hp;
     public int maxStamina;
     int stamina;
-
+    int swordAttack;
     bool isDie;
 
     // Update関数の前に一度だけ実行される：設定
     void Start()
     {
         GameObject swordObject = GameObject.Find("SwordPolyart");
+        swordAttack = swordObject.GetComponent<Damager>().damage;
         swordCollider = swordObject.GetComponent<MeshCollider>();
         swordSound = swordObject.GetComponent<AudioSource>();
         playerUIManager = GameObject.Find("PlayerUICanvas").GetComponent<PlayerUIManager>();
@@ -138,6 +139,11 @@ public class PlayerManager : MonoBehaviour
         playerUIManager.UpdateHP(hp);
     }
 
+    void Enhance(int attack)
+    {
+        swordAttack = attack;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (isDie)
@@ -147,6 +153,12 @@ public class PlayerManager : MonoBehaviour
         {
             Heal(healer.heal);
             healer.gameObject.SetActive(false);
+        }
+
+        Enhancer enhancer = other.GetComponent<Enhancer>();
+        if (enhancer != null)
+        {
+            Enhance(enhancer.attack);
         }
 
         Damager damager = other.GetComponent<Damager>();

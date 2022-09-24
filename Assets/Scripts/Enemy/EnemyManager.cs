@@ -17,7 +17,7 @@ public class EnemyManager : MonoBehaviour
     Collider enemyCollider;
     EnemyUIManager enemyUIManager;
     AudioSource axeSound;
-    public GameObject healItem;
+    public GameObject[] Items;
 
     public static int counter;
     public int maxHp = 50;
@@ -86,7 +86,8 @@ public class EnemyManager : MonoBehaviour
             hp = 0;
             animator.SetTrigger("Die");
             battleSceneManager.EnemyResponce();
-            Instantiate(healItem, gameObject.transform.position, Quaternion.identity);
+            int number = Random.Range(0, Items.Length);
+            Instantiate(Items[number], gameObject.transform.position, Quaternion.identity);
         }
     }
 
