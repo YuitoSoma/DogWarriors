@@ -9,13 +9,15 @@ public class PlayerAttackBehaviour : StateMachineBehaviour
     {
         // 速度を0にしたい
         animator.GetComponent<PlayerManager>().moveSpeed = 0;
+        animator.GetComponent<PlayerManager>().itemtext.SetActive(false);
     }
 
     // アニメーション中に実行される：Update関数のようなもの
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // 速度を0にしたい
+        animator.GetComponent<PlayerManager>().moveSpeed = 0;
+    }
 
     // アニメーションの遷移が行われる時
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

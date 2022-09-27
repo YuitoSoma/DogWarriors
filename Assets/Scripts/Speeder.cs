@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enhancer : MonoBehaviour
+public class Speeder : MonoBehaviour
 {
-    public int attack = 5;
+    public float speed = 5.0f;
     public Collider playerCollider;
-    AudioSource attackSound;
+    AudioSource speedSound;
 
     void Start()
     {
-        attackSound = GetComponent<AudioSource>();
+        speedSound = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other == playerCollider)
-            attackSound.Play();
+            speedSound.Play();
     }
 }

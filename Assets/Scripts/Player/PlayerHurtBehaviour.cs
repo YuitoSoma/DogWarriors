@@ -10,13 +10,14 @@ public class PlayerHurtBehaviour : StateMachineBehaviour
         animator.ResetTrigger("Hurt");
         // 速度を0にしたい
         animator.GetComponent<PlayerManager>().moveSpeed = 0.4f;
-        animator.GetComponent<PlayerManager>().HideColliderWeapon() ;
+        animator.GetComponent<PlayerManager>().HideColliderWeapon();
     }
 
     // アニメーション中に実行される：Update関数のようなもの
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        // 速度を0にしたい
+        animator.GetComponent<PlayerManager>().moveSpeed = 0.4f;
     }
 
     // アニメーションの遷移が行われる時

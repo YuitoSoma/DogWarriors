@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class PlayerUIManager : MonoBehaviour
@@ -26,10 +25,5 @@ public class PlayerUIManager : MonoBehaviour
     public void UpdateStamina(int stamina)
     {
         staminaSlider.DOValue(stamina, 0.3f);
-    }
-
-    public void OnStartButton()
-    {
-        SceneManager.LoadScene("TitleScene");
     }
 }

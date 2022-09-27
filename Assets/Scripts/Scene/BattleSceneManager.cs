@@ -16,7 +16,7 @@ public class BattleSceneManager : MonoBehaviour
 
     void Start()
     {
-        pausePanel.SetActive(false);
+        Time.timeScale = 1;     // ÄŠJ
         pauseButton.onClick.AddListener(Pause);
         resumeButton.onClick.AddListener(Resume);
     }
@@ -27,13 +27,13 @@ public class BattleSceneManager : MonoBehaviour
         currentScoreText.text = scoreText.text;
     }
 
-    void Pause()
+    public void Pause()
     {
         Time.timeScale = 0;     // ŠÔ’â~
         pausePanel.SetActive(true);
     }
 
-    void Resume()
+    public void Resume()
     {
         Time.timeScale = 1;     // ÄŠJ
         pausePanel.SetActive(false);
@@ -42,11 +42,17 @@ public class BattleSceneManager : MonoBehaviour
     public void EnemyResponce()
     {
         for (int i = 1; i <= 2;i++)
-            Instantiate(enemy, new Vector3(Random.Range(-45.0f,45.0f), 0.0f, Random.Range(-45.0f, 45.0f)), Quaternion.identity);
+            Instantiate(enemy, new Vector3(Random.Range(-40.0f,40.0f), 0.3f, Random.Range(-40.0f, 40.0f)), Quaternion.identity);
     }
 
-    public void OnStartButton()
+    public void OnSResumeButton()
     {
         SceneManager.LoadScene("BattleScene");
+        Time.timeScale = 1;     // ÄŠJ
+    }
+
+    public void OnResetButton()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 }

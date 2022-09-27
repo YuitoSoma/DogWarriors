@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -10,15 +11,23 @@ public class PlayerManager : MonoBehaviour
     PlayerUIManager playerUIManager;
     Transform target;
     AudioSource swordSound;
+    GameObject swordObject;
 
+    public GameObject itemtext;
     public GameObject finishPanel;
+    public Text itemText;
+    public Text attackText;
+    public Text speedText;
+
+    public float moveSpeed;
+    public float currentSpeed;
+    public int maxHp;
+    public int maxStamina;
 
     float x;
     float z;
-    public float moveSpeed;
-    public int maxHp;
+    float speedup = 0;
     int hp;
-    public int maxStamina;
     int stamina;
     int swordAttack;
     bool isDie;
@@ -26,18 +35,19 @@ public class PlayerManager : MonoBehaviour
     // Update関数の前に一度だけ実行される：設定
     void Start()
     {
-        GameObject swordObject = GameObject.Find("SwordPolyart");
-        swordAttack = swordObject.GetComponent<Damager>().damage;
+        swordObject = GameObject.Find("SwordPolyart");
         swordCollider = swordObject.GetComponent<MeshCollider>();
         swordSound = swordObject.GetComponent<AudioSource>();
         playerUIManager = GameObject.Find("PlayerUICanvas").GetComponent<PlayerUIManager>();
         target = GameObject.Find("Enemy").GetComponent<Transform>();
+
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
         EnemyManager.counter = 0;
         hp = maxHp;
         stamina = maxStamina;
+
         playerUIManager.Init(this);
         HideColliderWeapon();
     }
@@ -56,6 +66,21 @@ public class PlayerManager : MonoBehaviour
             Attack();
 
         Increase();
+
+        attackText.text = "AT : " + swordObject.GetComponent<Damager>().damage;
+        speedText.text = "SP : " + moveSpeed;
+    }
+
+    void FixedUpdate()
+    {
+        if (isDie)
+            return;
+        Vector3 direction = transform.position + new Vector3(x, 0, z);
+        transform.LookAt(direction);
+        // 速度設定
+        moveSpeed = currentSpeed + speedup;
+        rb.velocity = new Vector3(x, 0, z) * moveSpeed;
+        animator.SetFloat("Speed", rb.velocity.magnitude);
     }
 
     void Increase()
@@ -84,17 +109,6 @@ public class PlayerManager : MonoBehaviour
             transform.LookAt(target);
     }
 
-    private void FixedUpdate()
-    {
-        if (isDie)
-            return;
-        Vector3 direction = transform.position + new Vector3(x, 0, z);
-        transform.LookAt(direction);
-        // 速度設定
-        rb.velocity = new Vector3(x, 0, z) * moveSpeed;
-        animator.SetFloat("Speed", rb.velocity.magnitude);
-    }
-
     // 武器の判定を有効にしたり・消したりする関数
     public void HideColliderWeapon()
     {
@@ -119,6 +133,7 @@ public class PlayerManager : MonoBehaviour
             animator.SetTrigger("Die");
             rb.velocity = Vector3.zero;
             finishPanel.SetActive(true);
+            Time.timeScale = 0;     // 時間停止
         }
         playerUIManager.UpdateHP(hp);
     }
@@ -128,11 +143,15 @@ public class PlayerManager : MonoBehaviour
         // hpとhealを足した数値がmaxHp以下の場合，回復する．
         if (hp + heal <= maxHp)
         {
+            itemtext.SetActive(true);
+            itemText.text = "HP : ↑" + heal + "UP";
             hp += heal;
         }
         // hpが50より大きい場合はmaxHpにする
         else
         {
+            itemtext.SetActive(true);
+            itemText.text = "HP : ↑" + (maxHp - hp) + "UP";
             hp = maxHp;
         }
         
@@ -141,13 +160,23 @@ public class PlayerManager : MonoBehaviour
 
     void Enhance(int attack)
     {
-        swordAttack = attack;
+        swordObject.GetComponent<Damager>().damage += attack;
+        itemtext.SetActive(true);
+        itemText.text = "POWER : ↑" + attack + "UP";
+    }
+
+    void SpeedUp(float movepara)
+    {
+        speedup += movepara;
+        itemtext.SetActive(true);
+        itemText.text = "SPEED : ↑" + movepara + "UP";
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (isDie)
             return;
+
         Healer healer = other.GetComponent<Healer>();
         if (healer != null)
         {
@@ -159,6 +188,14 @@ public class PlayerManager : MonoBehaviour
         if (enhancer != null)
         {
             Enhance(enhancer.attack);
+            enhancer.gameObject.SetActive(false);
+        }
+
+        Speeder speeder = other.GetComponent<Speeder>();
+        if (speeder != null)
+        {
+            SpeedUp(speeder.speed);
+            speeder.gameObject.SetActive(false);
         }
 
         Damager damager = other.GetComponent<Damager>();

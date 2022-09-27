@@ -86,8 +86,7 @@ public class EnemyManager : MonoBehaviour
             hp = 0;
             animator.SetTrigger("Die");
             battleSceneManager.EnemyResponce();
-            int number = Random.Range(0, Items.Length);
-            Instantiate(Items[number], gameObject.transform.position, Quaternion.identity);
+            Instantiate(Items[Random.Range(0, Items.Length)], new Vector3(gameObject.transform.position.x, 1.0f, gameObject.transform.position.z), Quaternion.identity);
         }
     }
 

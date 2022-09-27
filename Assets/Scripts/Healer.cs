@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Healer : MonoBehaviour
 {
-    public int heal = 50;
+    public int heal = 20;
     public Collider playerCollider;
     AudioSource healSound;
 
