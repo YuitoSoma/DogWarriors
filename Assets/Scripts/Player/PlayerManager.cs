@@ -95,7 +95,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (stamina >= 20)
         {
-            stamina -= 10;
+            stamina -= 20;
             playerUIManager.UpdateStamina(stamina);
             LookAtTarget();
             animator.SetTrigger("Attack");
@@ -144,14 +144,14 @@ public class PlayerManager : MonoBehaviour
         if (hp + heal <= maxHp)
         {
             itemtext.SetActive(true);
-            itemText.text = "HP : Å™" + heal + "UP";
+            itemText.text = "HP : " + heal + "UP";
             hp += heal;
         }
         // hpÇ™50ÇÊÇËëÂÇ´Ç¢èÍçáÇÕmaxHpÇ…Ç∑ÇÈ
         else
         {
             itemtext.SetActive(true);
-            itemText.text = "HP : Å™" + (maxHp - hp) + "UP";
+            itemText.text = "HP : " + (maxHp - hp) + "UP";
             hp = maxHp;
         }
         
@@ -162,14 +162,14 @@ public class PlayerManager : MonoBehaviour
     {
         swordObject.GetComponent<Damager>().damage += attack;
         itemtext.SetActive(true);
-        itemText.text = "POWER : Å™" + attack + "UP";
+        itemText.text = "POWER : " + attack + "UP";
     }
 
     void SpeedUp(float movepara)
     {
         speedup += movepara;
         itemtext.SetActive(true);
-        itemText.text = "SPEED : Å™" + movepara + "UP";
+        itemText.text = "SPEED : " + movepara + "UP";
     }
 
     private void OnTriggerEnter(Collider other)
