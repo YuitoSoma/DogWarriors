@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject finishPanel;
     public Text attackText;
     public Text speedText;
+    public Text hpParamater;
 
     public float moveSpeed;
     public float currentSpeed;
@@ -29,7 +30,6 @@ public class PlayerManager : MonoBehaviour
     int stamina;
     bool isDie;
 
-    // Update関数の前に一度だけ実行される：設定
     void Start()
     {
         swordObject = GameObject.Find("SwordPolyart");
@@ -49,7 +49,6 @@ public class PlayerManager : MonoBehaviour
         HideColliderWeapon();
     }
 
-    // 約0.02秒に一回実行される
     void Update()
     {
         if (isDie)
@@ -123,6 +122,7 @@ public class PlayerManager : MonoBehaviour
         if (isDie)
             return;
         hp -= damage;
+        hpParamater.text = hp + "/100";
         if (hp <= 0)
         {
             hp = 0;
@@ -141,11 +141,13 @@ public class PlayerManager : MonoBehaviour
         if (hp + heal <= maxHp)
         {
             hp += heal;
+            hpParamater.text = hp + "/100";
         }
         // hpが50より大きい場合はmaxHpにする
         else
         {
             hp = maxHp;
+            hpParamater.text = hp + "/100";
         }
         
         playerUIManager.UpdateHP(hp);
