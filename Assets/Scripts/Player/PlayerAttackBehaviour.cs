@@ -9,7 +9,6 @@ public class PlayerAttackBehaviour : StateMachineBehaviour
     {
         // 速度を0にしたい
         animator.GetComponent<PlayerManager>().moveSpeed = 0;
-        animator.GetComponent<PlayerManager>().itemtext.SetActive(false);
     }
 
     // アニメーション中に実行される：Update関数のようなもの

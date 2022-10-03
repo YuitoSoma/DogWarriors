@@ -13,9 +13,7 @@ public class PlayerManager : MonoBehaviour
     AudioSource swordSound;
     GameObject swordObject;
 
-    public GameObject itemtext;
     public GameObject finishPanel;
-    public Text itemText;
     public Text attackText;
     public Text speedText;
 
@@ -142,15 +140,11 @@ public class PlayerManager : MonoBehaviour
         // hp‚Æheal‚ğ‘«‚µ‚½”’l‚ªmaxHpˆÈ‰º‚Ìê‡C‰ñ•œ‚·‚éD
         if (hp + heal <= maxHp)
         {
-            itemtext.SetActive(true);
-            itemText.text = "HP : " + heal + "UP";
             hp += heal;
         }
         // hp‚ª50‚æ‚è‘å‚«‚¢ê‡‚ÍmaxHp‚É‚·‚é
         else
         {
-            itemtext.SetActive(true);
-            itemText.text = "HP : " + (maxHp - hp) + "UP";
             hp = maxHp;
         }
         
@@ -160,15 +154,11 @@ public class PlayerManager : MonoBehaviour
     void Enhance(int attack)
     {
         swordObject.GetComponent<Damager>().damage += attack;
-        itemtext.SetActive(true);
-        itemText.text = "POWER : " + attack + "UP";
     }
 
     void SpeedUp(float movepara)
     {
         speedup += movepara;
-        itemtext.SetActive(true);
-        itemText.text = "SPEED : " + movepara + "UP";
     }
 
     private void OnTriggerEnter(Collider other)
