@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviour
     float speedup = 0;
     int hp;
     int stamina;
+    int swordAttack;
     bool isDie;
 
     void Start()
