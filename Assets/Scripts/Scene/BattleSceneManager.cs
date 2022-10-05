@@ -11,9 +11,11 @@ public class BattleSceneManager : MonoBehaviour
     [SerializeField] Button resumeButton;
 
     public GameObject enemy;
+    public GameObject finishPanel;
     public Text scoreText;
     public Text currentScoreText;
-
+    
+    public Slider slider;
     void Start()
     {
         Time.timeScale = 1;     // çƒäJ
@@ -25,6 +27,12 @@ public class BattleSceneManager : MonoBehaviour
         int number = EnemyManager.counter;
         scoreText.text = "SCORE : " + number;
         currentScoreText.text = scoreText.text;
+        if (slider.value == 0.0f)
+        {
+            finishPanel.SetActive(true);
+            Time.timeScale = 0;     // éûä‘í‚é~
+        }
+
     }
 
     public void Pause()

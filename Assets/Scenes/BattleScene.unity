@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1397,8 +1397,10 @@ MonoBehaviour:
   pausePanel: {fileID: 243223234}
   resumeButton: {fileID: 55601639}
   enemy: {fileID: 7704732896157364295, guid: d0308de0950b1674185bdbce019d3956, type: 3}
+  finishPanel: {fileID: 62309160}
   scoreText: {fileID: 1365735737}
   currentScoreText: {fileID: 1647050337}
+  slider: {fileID: 1038287315}
 --- !u!4 &875248917
 Transform:
   m_ObjectHideFlags: 0
@@ -1793,7 +1795,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.800003, y: 0}
+  m_AnchoredPosition: {x: -1.8000183, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1049146055
@@ -4437,7 +4439,7 @@ PrefabInstance:
     - target: {fileID: 6098550007209725809, guid: f4c141800483d664d9302ee128fb9344,
         type: 3}
       propertyPath: currentSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6098550007209725816, guid: f4c141800483d664d9302ee128fb9344,
         type: 3}

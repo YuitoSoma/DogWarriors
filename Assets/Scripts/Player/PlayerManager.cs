@@ -13,7 +13,6 @@ public class PlayerManager : MonoBehaviour
     AudioSource swordSound;
     GameObject swordObject;
 
-    public GameObject finishPanel;
     public Text attackText;
     public Text speedText;
     public Text hpParamater;
@@ -130,8 +129,6 @@ public class PlayerManager : MonoBehaviour
             isDie = true;
             animator.SetTrigger("Die");
             rb.velocity = Vector3.zero;
-            finishPanel.SetActive(true);
-            Time.timeScale = 0;     // ŽžŠÔ’âŽ~
         }
         playerUIManager.UpdateHP(hp);
     }
