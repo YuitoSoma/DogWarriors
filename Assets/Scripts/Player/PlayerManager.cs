@@ -25,9 +25,9 @@ public class PlayerManager : MonoBehaviour
     float x;
     float z;
     float speedup = 0;
+    float speed;
     int hp;
     int stamina;
-    int swordAttack;
     bool isDie;
 
     void Start()
@@ -44,6 +44,7 @@ public class PlayerManager : MonoBehaviour
         EnemyManager.counter = 0;
         hp = maxHp;
         stamina = maxStamina;
+        speed = currentSpeed;
 
         playerUIManager.Init(this);
         HideColliderWeapon();
@@ -64,7 +65,7 @@ public class PlayerManager : MonoBehaviour
         Increase();
 
         attackText.text = "AT : " + swordObject.GetComponent<Damager>().damage;
-        speedText.text = "SP : " + moveSpeed;
+        speedText.text = "SP : " + speed;
     }
 
     void FixedUpdate()
@@ -159,6 +160,7 @@ public class PlayerManager : MonoBehaviour
     void SpeedUp(float movepara)
     {
         speedup += movepara;
+        speed += movepara;
     }
 
     private void OnTriggerEnter(Collider other)

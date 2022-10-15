@@ -8,14 +8,14 @@ public class PlayerAttackBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // 速度を0にしたい
-        animator.GetComponent<PlayerManager>().moveSpeed = 0;
+        animator.GetComponent<PlayerManager>().moveSpeed = 0.0f;
     }
 
     // アニメーション中に実行される：Update関数のようなもの
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // 速度を0にしたい
-        animator.GetComponent<PlayerManager>().moveSpeed = 0;
+        animator.GetComponent<PlayerManager>().moveSpeed = 0.0f;
     }
 
     // アニメーションの遷移が行われる時
