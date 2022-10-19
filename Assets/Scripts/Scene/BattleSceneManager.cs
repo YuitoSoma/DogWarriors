@@ -31,6 +31,7 @@ public class BattleSceneManager : MonoBehaviour
         {
             finishPanel.SetActive(true);
             Time.timeScale = 0;     // ŽžŠÔ’âŽ~
+            EnemyManager.counter = 0;
         }
 
     }
@@ -62,5 +63,6 @@ public class BattleSceneManager : MonoBehaviour
     public void OnResetButton()
     {
         SceneManager.LoadScene("TitleScene");
+        EnemyManager.counter = 0;
     }
 }

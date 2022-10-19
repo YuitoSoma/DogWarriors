@@ -5072,6 +5072,7 @@ MonoBehaviour:
   attack: 5
   playerCollider: {fileID: 6098550007209725808, guid: f4c141800483d664d9302ee128fb9344,
     type: 3}
+  attackSound: {fileID: 0}
 --- !u!1 &4163194975676715326
 GameObject:
   m_ObjectHideFlags: 0

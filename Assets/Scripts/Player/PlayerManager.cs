@@ -13,6 +13,10 @@ public class PlayerManager : MonoBehaviour
     AudioSource swordSound;
     GameObject swordObject;
 
+    public AudioSource healSound;
+    public AudioSource attackSound;
+    public AudioSource speedSound;
+
     public Text attackText;
     public Text speedText;
     public Text hpParamater;
@@ -109,12 +113,13 @@ public class PlayerManager : MonoBehaviour
     // •Ší‚Ì”»’è‚ğ—LŒø‚É‚µ‚½‚èEÁ‚µ‚½‚è‚·‚éŠÖ”
     public void HideColliderWeapon()
     {
+        swordSound.enabled = false;
         swordCollider.enabled = false;
     }
 
     public void ShowColliderWeapon()
     {
-        swordSound.Play();
+        swordSound.enabled = true;
         swordCollider.enabled = true;
     }
 
@@ -150,20 +155,23 @@ public class PlayerManager : MonoBehaviour
         }
         
         playerUIManager.UpdateHP(hp);
+        healSound.enabled = true;
     }
 
     void Enhance(int attack)
     {
         swordObject.GetComponent<Damager>().damage += attack;
+        attackSound.enabled = true;
     }
 
     void SpeedUp(float movepara)
     {
         speedup += movepara;
         speed += movepara;
+        speedSound.enabled = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (isDie)
             return;

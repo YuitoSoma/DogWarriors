@@ -4,9 +4,9 @@ using UnityEngine.Audio;
 public class AnimationEventStepPlayer : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip audioClip;
+    AudioClip audioClip;
 
-    private AudioSource audioSource;
+    AudioSource audioSource;
 
     private void Start()
     {

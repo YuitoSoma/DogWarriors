@@ -6,16 +6,10 @@ public class Speeder : MonoBehaviour
 {
     public float speed = 5.0f;
     public Collider playerCollider;
-    AudioSource speedSound;
+    public AudioSource speedSound;
 
-    void Start()
+    private void Start()
     {
         speedSound = GetComponent<AudioSource>();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other == playerCollider)
-            speedSound.Play();
     }
 }
