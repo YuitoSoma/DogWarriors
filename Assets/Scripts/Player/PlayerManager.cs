@@ -13,9 +13,13 @@ public class PlayerManager : MonoBehaviour
     AudioSource swordSound;
     GameObject swordObject;
 
-    public AudioSource healSound;
-    public AudioSource attackSound;
-    public AudioSource speedSound;
+    public AudioClip healSound;
+    public AudioClip attackSound;
+    public AudioClip speedSound;
+
+    AudioSource healsound;
+    AudioSource attacksound;
+    AudioSource speedsound;
 
     public Text attackText;
     public Text speedText;
@@ -44,6 +48,10 @@ public class PlayerManager : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        healsound = GetComponent<AudioSource>();
+        attacksound = GetComponent<AudioSource>();
+        speedsound = GetComponent<AudioSource>();
 
         EnemyManager.counter = 0;
         hp = maxHp;
@@ -155,20 +163,20 @@ public class PlayerManager : MonoBehaviour
         }
         
         playerUIManager.UpdateHP(hp);
-        healSound.enabled = true;
+        healsound.PlayOneShot(healSound);
     }
 
     void Enhance(int attack)
     {
         swordObject.GetComponent<Damager>().damage += attack;
-        attackSound.enabled = true;
+        attacksound.PlayOneShot(attackSound);
     }
 
     void SpeedUp(float movepara)
     {
         speedup += movepara;
         speed += movepara;
-        speedSound.enabled = true;
+        speedsound.PlayOneShot(speedSound);
     }
 
     void OnTriggerEnter(Collider other)

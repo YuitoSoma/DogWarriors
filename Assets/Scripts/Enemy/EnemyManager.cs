@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour
     EnemyUIManager enemyUIManager;
     AudioSource axeSound;
     public GameObject[] Items;
+    public AudioClip axesound;
 
     public static int counter;
     public int maxHp = 50;
@@ -28,13 +29,13 @@ public class EnemyManager : MonoBehaviour
         target = GameObject.Find("Player").transform;
         battleSceneManager = GameObject.Find("BattleSceneManager").GetComponent<BattleSceneManager>();
         axeCollider = GameObject.Find("Axe").GetComponent<BoxCollider>();
-        axeSound = GameObject.Find("Axe").GetComponent<AudioSource>();
         swordCollider = GameObject.Find("SwordPolyart").GetComponent<MeshCollider>();
         enemyUIManager = transform.Find("EnemyUICanvas").gameObject.GetComponent<EnemyUIManager>();
 
         enemyCollider = GetComponent<CapsuleCollider>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        axeSound = GetComponent<AudioSource>();
 
         hp = maxHp;
         enemyUIManager.Init(this);
@@ -58,13 +59,12 @@ public class EnemyManager : MonoBehaviour
     public void HideColliderWeapon()
     {
         axeCollider.enabled = false;
-        axeSound.enabled = false;
     }
 
     public void ShowColliderWeapon()
     {
         axeCollider.enabled = true;
-        axeSound.enabled = true;
+        axeSound.PlayOneShot(axesound);
     }
 
     public void EnemyCollider()
