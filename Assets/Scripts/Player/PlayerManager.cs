@@ -27,20 +27,18 @@ public class PlayerManager : MonoBehaviour
 
     public float moveSpeed;
     public float currentSpeed;
+    public float speed;
     public int maxHp;
     public int maxStamina;
 
     float x;
     float z;
     float speedup = 0;
-    float speed;
 
     int hp;
     int stamina;
 
     bool isDie;
-
-    Vector3 direction;
 
     void Start()
     {
@@ -76,9 +74,7 @@ public class PlayerManager : MonoBehaviour
 
         // 攻撃入力
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             Attack();
-        }
 
         Increase();
 
@@ -90,7 +86,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (isDie)
             return;
-        direction = transform.position + new Vector3(x, 0, z);
+        Vector3 direction = transform.position + new Vector3(x, 0, z);
         transform.LookAt(direction);
         // 速度設定
         moveSpeed = currentSpeed + speedup;
@@ -98,6 +94,7 @@ public class PlayerManager : MonoBehaviour
         animator.SetFloat("Speed", rb.velocity.magnitude);
     }
 
+    // スタミナ計算
     void Increase()
     {
         stamina++;
@@ -106,6 +103,7 @@ public class PlayerManager : MonoBehaviour
         playerUIManager.UpdateStamina(stamina);
     }
 
+    // 攻撃のスタミナ消費
     void Attack()
     {
         if (stamina >= 20)
@@ -117,6 +115,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    // 攻撃の方向転換
     void LookAtTarget()
     {
         float distance = Vector3.Distance(transform.position, target.position);
@@ -137,6 +136,7 @@ public class PlayerManager : MonoBehaviour
         swordCollider.enabled = true;
     }
 
+    // 被ダメージの計算
     void Damage(int damage)
     {
         if (isDie)
@@ -153,6 +153,7 @@ public class PlayerManager : MonoBehaviour
         playerUIManager.UpdateHP(hp);
     }
 
+    // 回復計算
     void Heal(int heal)
     {
         // hpとhealを足した数値がmaxHp以下の場合，回復する．
@@ -172,12 +173,14 @@ public class PlayerManager : MonoBehaviour
         healsound.PlayOneShot(healSound);
     }
 
+    // 攻撃上昇計算
     void Enhance(int attack)
     {
         swordObject.GetComponent<Damager>().damage += attack;
         attacksound.PlayOneShot(attackSound);
     }
 
+    // 移動速度上昇計算
     void SpeedUp(float movepara)
     {
         speedup += movepara;

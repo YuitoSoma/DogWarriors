@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class TimeCounter : MonoBehaviour
 {
@@ -30,6 +29,8 @@ public class TimeCounter : MonoBehaviour
             // 0•b‚É‚È‚Á‚½‚Æ‚«‚Ìˆ—
             finishPanel.SetActive(true);
             Time.timeScale = 0;     // ŠÔ’â~
+            if (ScoreText.bestnumber < EnemyManager.counter)
+                ScoreText.bestnumber = EnemyManager.counter;
         }
     }
 }

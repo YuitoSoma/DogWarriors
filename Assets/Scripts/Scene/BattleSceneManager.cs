@@ -28,12 +28,15 @@ public class BattleSceneManager : MonoBehaviour
         int number = EnemyManager.counter;
         // 現在のスコア表示
         scoreText.text = "SCORE : " + number;
+        // FinishPanelに表示
         finishCurrentScoreText.text = scoreText.text;
         if (slider.value == 0.0f)
         {
             finishPanel.SetActive(true);
             Time.timeScale = 0;     // 時間停止
             EnemyManager.counter = 0;
+            if (ScoreText.bestnumber < EnemyManager.counter)
+                ScoreText.bestnumber = EnemyManager.counter;
         }
 
     }
@@ -56,10 +59,14 @@ public class BattleSceneManager : MonoBehaviour
             Instantiate(enemy, new Vector3(Random.Range(-40.0f,40.0f), 0.3f, Random.Range(-40.0f, 40.0f)), Quaternion.identity);
     }
 
-    public void OnSResumeButton()
+    public void OnRetryButton()
     {
         SceneManager.LoadScene("BattleScene");
-        Time.timeScale = 1;     // 再開
+    }
+
+    public void OnTitleButton()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 
     public void OnResetButton()

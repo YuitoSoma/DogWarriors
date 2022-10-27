@@ -8,5 +8,6 @@ public class TitleSceneManager : MonoBehaviour
    public void OnStartButton()
     {
         SceneManager.LoadScene("BattleScene");
+        EnemyManager.counter = 0;
     }
 }

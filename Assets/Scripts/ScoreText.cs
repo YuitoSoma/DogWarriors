@@ -10,8 +10,6 @@ public class ScoreText : MonoBehaviour
 
     void Update()
     {
-        if (bestnumber < EnemyManager.counter)
-            bestnumber = EnemyManager.counter;
         bestScoreText.text = "BEST SCORE : " + bestnumber;
     }
 }

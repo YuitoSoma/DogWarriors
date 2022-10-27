@@ -4,25 +4,23 @@ using UnityEngine;
 
 public class PlayerAttackBehaviour : StateMachineBehaviour
 {
-    // アニメーション開始時に実行される：Start関数のようなもの
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // 速度を0にしたい
-        animator.GetComponent<PlayerManager>().moveSpeed = 0.0f;
+        // 速度を0
+        animator.GetComponent<PlayerManager>().currentSpeed = 0;
     }
 
-    // アニメーション中に実行される：Update関数のようなもの
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // 速度を0にしたい
-        animator.GetComponent<PlayerManager>().moveSpeed = 0.0f;
+        // 速度を0
+        animator.GetComponent<PlayerManager>().currentSpeed = 0;
     }
 
-    // アニメーションの遷移が行われる時
+
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // 速度を戻す
-        animator.GetComponent<PlayerManager>().moveSpeed = 3;
+        float speed = animator.GetComponent<PlayerManager>().speed;
+        animator.GetComponent<PlayerManager>().currentSpeed = speed;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
