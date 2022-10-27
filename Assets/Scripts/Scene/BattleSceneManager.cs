@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class BattleSceneManager : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class BattleSceneManager : MonoBehaviour
 
     public GameObject enemy;
     public GameObject finishPanel;
-    public Text scoreText;
-    public Text currentScoreText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI finishCurrentScoreText;
     
     public Slider slider;
     void Start()
@@ -25,8 +26,9 @@ public class BattleSceneManager : MonoBehaviour
     void Update()
     {
         int number = EnemyManager.counter;
+        // 現在のスコア表示
         scoreText.text = "SCORE : " + number;
-        currentScoreText.text = scoreText.text;
+        finishCurrentScoreText.text = scoreText.text;
         if (slider.value == 0.0f)
         {
             finishPanel.SetActive(true);

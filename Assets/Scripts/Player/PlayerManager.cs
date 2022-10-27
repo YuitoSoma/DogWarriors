@@ -34,9 +34,13 @@ public class PlayerManager : MonoBehaviour
     float z;
     float speedup = 0;
     float speed;
+
     int hp;
     int stamina;
+
     bool isDie;
+
+    Vector3 direction;
 
     void Start()
     {
@@ -66,25 +70,27 @@ public class PlayerManager : MonoBehaviour
     {
         if (isDie)
             return;
-        // キーボード入力移動させたい
+        // キーボード入力移動
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 
         // 攻撃入力
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             Attack();
+        }
 
         Increase();
 
-        attackText.text = "AT : " + swordObject.GetComponent<Damager>().damage;
-        speedText.text = "SP : " + speed;
+        attackText.text = "     AT       : " + swordObject.GetComponent<Damager>().damage;
+        speedText.text = "     SP       : " + speed;
     }
 
     void FixedUpdate()
     {
         if (isDie)
             return;
-        Vector3 direction = transform.position + new Vector3(x, 0, z);
+        direction = transform.position + new Vector3(x, 0, z);
         transform.LookAt(direction);
         // 速度設定
         moveSpeed = currentSpeed + speedup;
