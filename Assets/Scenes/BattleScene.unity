@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 155727406}
   - component: {fileID: 155727405}
   m_Layer: 5
-  m_Name: Attack
+  m_Name: AttackRabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,8 +466,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -413.6, y: -219}
-  m_SizeDelta: {x: 165, y: 44.4}
+  m_AnchoredPosition: {x: -385.7, y: -218.79}
+  m_SizeDelta: {x: 277.8332, y: 44.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155727405
 MonoBehaviour:
@@ -496,13 +496,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 41
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'AT : 00
+  m_Text: '     AT       : 00
 
 '
 --- !u!222 &155727406
@@ -817,13 +817,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389840195}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.1, z: 0}
-  m_LocalScale: {x: 15, y: 1, z: 15}
+  m_LocalScale: {x: 1.875, y: 1, z: 1.875}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 1788642162}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &556671026
 GameObject:
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PUASE
+  m_text: PAUSE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1407,7 +1407,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &875248918
 AudioSource:
@@ -1517,7 +1517,7 @@ GameObject:
   - component: {fileID: 875739525}
   - component: {fileID: 875739524}
   m_Layer: 5
-  m_Name: SP
+  m_Name: SpRabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1540,8 +1540,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -413.5799, y: -251}
-  m_SizeDelta: {x: 165.0805, y: 44.4}
+  m_AnchoredPosition: {x: -389.8, y: -251}
+  m_SizeDelta: {x: 277.9137, y: 44.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &875739524
 MonoBehaviour:
@@ -1576,7 +1576,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'SP : 00'
+  m_Text: '    SP       : 00'
 --- !u!222 &875739525
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1620,7 +1620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 85, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &948072131
@@ -1841,7 +1841,7 @@ GameObject:
   - component: {fileID: 1096160317}
   - component: {fileID: 1096160316}
   m_Layer: 5
-  m_Name: Stamnina
+  m_Name: StamninaRabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1864,8 +1864,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -199.78212, y: 0}
-  m_SizeDelta: {x: 119.836, y: 44.4}
+  m_AnchoredPosition: {x: -157, y: -0.14999}
+  m_SizeDelta: {x: 208.81, y: 44.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1096160316
 MonoBehaviour:
@@ -1900,7 +1900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ST : '
+  m_Text: 'STAMINA : '
 --- !u!222 &1096160317
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2270,7 +2270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.158, y: 0.0000061989}
+  m_AnchoredPosition: {x: 82, y: 0.0000061989}
   m_SizeDelta: {x: 172.936, y: 44.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1336070072
@@ -2639,8 +2639,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 2.5, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 94.5, y: 0}
+  m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1485641815
 GameObject:
@@ -3285,7 +3285,7 @@ RectTransform:
   - {fileID: 62309161}
   - {fileID: 243223237}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3461,8 +3461,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 91.25, y: -0.29999}
+  m_SizeDelta: {x: -2.42, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710722277
 MonoBehaviour:
@@ -3536,7 +3536,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 2, y: 0}
+  m_AnchoredPosition: {x: 86, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1771456047
@@ -3773,8 +3773,9 @@ Transform:
   - {fileID: 556671027}
   - {fileID: 811455081}
   - {fileID: 1122451770}
+  - {fileID: 389840199}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1831594024
 GameObject:
@@ -3813,7 +3814,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -325, y: -187}
+  m_AnchoredPosition: {x: -327.9, y: -187}
   m_SizeDelta: {x: 300, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1831594026
@@ -4248,7 +4249,7 @@ GameObject:
   - component: {fileID: 2029668775}
   - component: {fileID: 2029668774}
   m_Layer: 5
-  m_Name: HP
+  m_Name: HpRabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4271,8 +4272,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -204, y: 0}
-  m_SizeDelta: {x: 109.2, y: 44.6}
+  m_AnchoredPosition: {x: -129, y: -0.20001}
+  m_SizeDelta: {x: 189.795, y: 44.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2029668774
 MonoBehaviour:
@@ -4307,7 +4308,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'HP : '
+  m_Text: 'HP      : '
 --- !u!222 &2029668775
 CanvasRenderer:
   m_ObjectHideFlags: 0
