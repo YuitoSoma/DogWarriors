@@ -16,10 +16,12 @@ public class PlayerManager : MonoBehaviour
     public AudioClip healSound;
     public AudioClip attackSound;
     public AudioClip speedSound;
+    public AudioClip audioClip;
 
     AudioSource healsound;
     AudioSource attacksound;
     AudioSource speedsound;
+    AudioSource audioSource;
 
     public Text attackText;
     public Text speedText;
@@ -54,6 +56,7 @@ public class PlayerManager : MonoBehaviour
         healsound = GetComponent<AudioSource>();
         attacksound = GetComponent<AudioSource>();
         speedsound = GetComponent<AudioSource>();
+        audioSource = CreateAudioSource();
 
         EnemyManager.counter = 0;
         hp = maxHp;
@@ -186,6 +189,24 @@ public class PlayerManager : MonoBehaviour
         speedup += movepara;
         speed += movepara;
         speedsound.PlayOneShot(speedSound);
+    }
+
+    // ë´âπê∂ê¨
+    AudioSource CreateAudioSource()
+    {
+        var audioGameObject = new GameObject();
+        audioGameObject.name = "AnimationEventSEPlayer";
+        audioGameObject.transform.SetParent(gameObject.transform);
+
+        var audioSource = audioGameObject.AddComponent<AudioSource>();
+        audioSource.clip = audioClip;
+
+        return audioSource;
+    }
+
+    public void Play(string eventName)
+    {
+        audioSource.Play();
     }
 
     void OnTriggerEnter(Collider other)
