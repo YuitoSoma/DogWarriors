@@ -5,57 +5,51 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    Animator animator;
-    Rigidbody rb;
-    Collider swordCollider;
-    PlayerUIManager playerUIManager;
-    Transform target;
-    AudioSource swordSound;
-    GameObject swordObject;
+    Animator animator;                  // アニメーター変数
+    Rigidbody rb;                       // リジッドボディ変数
+    Collider swordCollider;             // 武器のコライダ変数
+    PlayerUIManager playerUIManager;    // PlayerUIManager変数
+    Transform target;                   // enemyの位置情報
+    AudioSource swordSound;             // 攻撃時の音を格納した変数
+    GameObject swordObject;             // プレイヤーの武器オブジェクト
 
-    public AudioClip healSound;
-    public AudioClip attackSound;
-    public AudioClip speedSound;
-    public AudioClip audioClip;
+    public AudioClip healSound;         // 回復サウンド
+    public AudioClip attackSound;       // 攻撃アップ時のサウンド
+    public AudioClip speedSound;        // スピードアップ時のサウンド
+    public AudioClip audioClip;         // 足音を格納する変数
 
-    AudioSource healsound;
-    AudioSource attacksound;
-    AudioSource speedsound;
-    AudioSource audioSource;
+    AudioSource effectSound;            // サウンド再生用変数
 
-    public Text attackText;
-    public Text speedText;
-    public Text hpParamater;
+    AudioSource audioSource;            // 足音再生用変数
 
-    public float moveSpeed;
-    public float currentSpeed;
-    public float speed;
-    public int maxHp;
-    public int maxStamina;
+    public Text attackText;             //　UIの攻撃パラメータのテキスト
+    public Text speedText;              //　UIのスピードパラメータのテキスト
+    public Text hpParamater;            //　HPゲージ上のUIテキスト
+    public float enemyDistance;         //　enemyとの距離
+    public float moveSpeed;             //　現在のスピード
+    public float currentSpeed;          //　初期の移動スピード
+    public float speed;                 //　現在のスピード（UI用）
+    public int maxHp;                   //　最大の体力
+    public int maxStamina;              //　最大のスタミナ
+    public int attackStamina;           //　攻撃時の消費スタミナ
 
-    float x;
-    float z;
-    float speedup = 0;
-
-    int hp;
-    int stamina;
-
-    bool isDie;
-
+    float x;                            //　ｘ軸の移動方向
+    float z;                            //　ｚ軸の移動方向
+    float speedup = 0;                  //　スピード上昇率
+    int hp;                             //　体力
+    int stamina;                        //　スタミナ
+    bool isDie;                         //　負け判定
     void Start()
     {
+        //　必要なコンポーネントを自動取得
         swordObject = GameObject.Find("SwordPolyart");
         swordCollider = swordObject.GetComponent<MeshCollider>();
         swordSound = swordObject.GetComponent<AudioSource>();
         playerUIManager = GameObject.Find("PlayerUICanvas").GetComponent<PlayerUIManager>();
         target = GameObject.Find("Enemy").GetComponent<Transform>();
-
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
-        healsound = GetComponent<AudioSource>();
-        attacksound = GetComponent<AudioSource>();
-        speedsound = GetComponent<AudioSource>();
+        effectSound = GetComponent<AudioSource>();
         audioSource = CreateAudioSource();
 
         EnemyManager.counter = 0;
@@ -71,6 +65,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (isDie)
             return;
+
         // キーボード入力移動
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
@@ -81,6 +76,7 @@ public class PlayerManager : MonoBehaviour
 
         Increase();
 
+        //　UIの更新
         attackText.text = "     AT       : " + swordObject.GetComponent<Damager>().damage;
         speedText.text = "     SP       : " + speed;
     }
@@ -89,6 +85,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (isDie)
             return;
+
+        // 移動方向
         Vector3 direction = transform.position + new Vector3(x, 0, z);
         transform.LookAt(direction);
         // 速度設定
@@ -109,9 +107,9 @@ public class PlayerManager : MonoBehaviour
     // 攻撃のスタミナ消費
     void Attack()
     {
-        if (stamina >= 20)
+        if (stamina >= attackStamina)
         {
-            stamina -= 20;
+            stamina -= attackStamina;
             playerUIManager.UpdateStamina(stamina);
             LookAtTarget();
             animator.SetTrigger("Attack");
@@ -122,17 +120,18 @@ public class PlayerManager : MonoBehaviour
     void LookAtTarget()
     {
         float distance = Vector3.Distance(transform.position, target.position);
-        if (distance <= 2.0f)
+        if (distance <= enemyDistance)
             transform.LookAt(target);
     }
 
-    // 武器の判定を有効にしたり・消したりする関数
+    // 武器のコライダーを無効
     public void HideColliderWeapon()
     {
         swordSound.enabled = false;
         swordCollider.enabled = false;
     }
 
+    // 武器のコライダを有効
     public void ShowColliderWeapon()
     {
         swordSound.enabled = true;
@@ -144,8 +143,10 @@ public class PlayerManager : MonoBehaviour
     {
         if (isDie)
             return;
+
         hp -= damage;
         hpParamater.text = hp + "/100";
+        playerUIManager.UpdateHP(hp);
         if (hp <= 0)
         {
             hp = 0;
@@ -153,7 +154,6 @@ public class PlayerManager : MonoBehaviour
             animator.SetTrigger("Die");
             rb.velocity = Vector3.zero;
         }
-        playerUIManager.UpdateHP(hp);
     }
 
     // 回復計算
@@ -173,14 +173,14 @@ public class PlayerManager : MonoBehaviour
         }
         
         playerUIManager.UpdateHP(hp);
-        healsound.PlayOneShot(healSound);
+        effectSound.PlayOneShot(healSound);
     }
 
     // 攻撃上昇計算
     void Enhance(int attack)
     {
         swordObject.GetComponent<Damager>().damage += attack;
-        attacksound.PlayOneShot(attackSound);
+        effectSound.PlayOneShot(attackSound);
     }
 
     // 移動速度上昇計算
@@ -188,14 +188,13 @@ public class PlayerManager : MonoBehaviour
     {
         speedup += movepara;
         speed += movepara;
-        speedsound.PlayOneShot(speedSound);
+        effectSound.PlayOneShot(speedSound);
     }
 
     // 足音生成
     AudioSource CreateAudioSource()
     {
         var audioGameObject = new GameObject();
-        audioGameObject.name = "AnimationEventSEPlayer";
         audioGameObject.transform.SetParent(gameObject.transform);
 
         var audioSource = audioGameObject.AddComponent<AudioSource>();
@@ -204,11 +203,13 @@ public class PlayerManager : MonoBehaviour
         return audioSource;
     }
 
+    // 足音再生
     public void Play(string eventName)
     {
         audioSource.Play();
     }
 
+    // 当たり判定（enemyの武器・各種アイテムに接触した時のイベント発生）
     void OnTriggerEnter(Collider other)
     {
         if (isDie)
