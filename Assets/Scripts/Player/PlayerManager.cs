@@ -7,24 +7,23 @@ public class PlayerManager : MonoBehaviour
 {
     Animator animator;                  // アニメーター変数
     Rigidbody rb;                       // リジッドボディ変数
+    Collider playerCollider;            // プレイヤーのコライダ変数
     Collider swordCollider;             // 武器のコライダ変数
     PlayerUIManager playerUIManager;    // PlayerUIManager変数
-    Transform target;                   // enemyの位置情報
     AudioSource swordSound;             // 攻撃時の音を格納した変数
     GameObject swordObject;             // プレイヤーの武器オブジェクト
+    Transform target;                   // 敵の位置情報
+    AudioSource effectSound;            // サウンド再生用変数
+    AudioSource audioSource;            // 足音再生用変数
 
     public AudioClip healSound;         // 回復サウンド
     public AudioClip attackSound;       // 攻撃アップ時のサウンド
     public AudioClip speedSound;        // スピードアップ時のサウンド
     public AudioClip audioClip;         // 足音を格納する変数
-
-    AudioSource effectSound;            // サウンド再生用変数
-
-    AudioSource audioSource;            // 足音再生用変数
-
     public Text attackText;             //　UIの攻撃パラメータのテキスト
     public Text speedText;              //　UIのスピードパラメータのテキスト
     public Text hpParamater;            //　HPゲージ上のUIテキスト
+
     public float enemyDistance;         //　enemyとの距離
     public float moveSpeed;             //　現在のスピード
     public float currentSpeed;          //　初期の移動スピード
@@ -32,6 +31,7 @@ public class PlayerManager : MonoBehaviour
     public int maxHp;                   //　最大の体力
     public int maxStamina;              //　最大のスタミナ
     public int attackStamina;           //　攻撃時の消費スタミナ
+    public int defendStamina;           //　防御時の消費スタミナ
 
     float x;                            //　ｘ軸の移動方向
     float z;                            //　ｚ軸の移動方向
@@ -41,13 +41,13 @@ public class PlayerManager : MonoBehaviour
     bool isDie;                         //　負け判定
     void Start()
     {
-        //　必要なコンポーネントを自動取得
+        // 必要なコンポーネントを自動取得
         swordObject = GameObject.Find("SwordPolyart");
         swordCollider = swordObject.GetComponent<MeshCollider>();
         swordSound = swordObject.GetComponent<AudioSource>();
         playerUIManager = GameObject.Find("PlayerUICanvas").GetComponent<PlayerUIManager>();
-        target = GameObject.Find("Enemy").GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        playerCollider = GetComponent<CapsuleCollider>();
         animator = GetComponent<Animator>();
         effectSound = GetComponent<AudioSource>();
         audioSource = CreateAudioSource();
@@ -71,14 +71,17 @@ public class PlayerManager : MonoBehaviour
         z = Input.GetAxisRaw("Vertical");
 
         // 攻撃入力
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Space))
             Attack();
+
+        if (Input.GetKeyDown(KeyCode.Return))
+            Defend();
 
         Increase();
 
         //　UIの更新
         attackText.text = "     AT       : " + swordObject.GetComponent<Damager>().damage;
-        speedText.text = "     SP       : " + speed;
+        speedText.text  = "     SP       : " + speed;
     }
 
     void FixedUpdate()
@@ -104,7 +107,7 @@ public class PlayerManager : MonoBehaviour
         playerUIManager.UpdateStamina(stamina);
     }
 
-    // 攻撃のスタミナ消費
+    // 攻撃
     void Attack()
     {
         if (stamina >= attackStamina)
@@ -116,12 +119,64 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    // 攻撃の方向転換
+    // 防御
+    void Defend()
+    {
+        if (stamina >= defendStamina)
+        {
+            stamina -= defendStamina;
+            playerUIManager.UpdateStamina(stamina);
+            LookAtTarget();
+            animator.SetTrigger("Defend");
+        }
+    }
+    // 方向転換
     void LookAtTarget()
     {
+        //最も近かったオブジェクトを取得
+        target = serchTag(gameObject, "Enemy");
+        Debug.Log(target.name);
         float distance = Vector3.Distance(transform.position, target.position);
         if (distance <= enemyDistance)
             transform.LookAt(target);
+    }
+
+    //指定されたタグの中で最も近いものを取得
+    Transform serchTag(GameObject nowObj, string tagName)
+    {
+        float tmpDis = 0;           //距離用一時変数
+        float nearDis = 0;          //最も近いオブジェクトの距離
+        GameObject targetObj = null; //オブジェクト
+
+        //タグ指定されたオブジェクトを配列で取得する
+        foreach (GameObject obs in GameObject.FindGameObjectsWithTag(tagName))
+        {
+            //自身と取得したオブジェクトの距離を取得
+            tmpDis = Vector3.Distance(obs.transform.position, nowObj.transform.position);
+
+            //オブジェクトの距離が近いか、距離0であればオブジェクト名を取得
+            //一時変数に距離を格納
+            if (nearDis == 0 || nearDis > tmpDis)
+            {
+                nearDis = tmpDis;
+                targetObj = obs;
+            }
+
+        }
+        //最も近かったオブジェクトの位置情報を返す
+        return targetObj.transform;
+    }
+
+    // プレイヤ―のコライダの無効
+    public void HideColliderPlayer()
+    {
+        playerCollider.enabled = false;
+    }
+
+    // プレイヤ―のコライダの有効
+    public void ShowColliderPlayer()
+    {
+        playerCollider.enabled = true;
     }
 
     // 武器のコライダーを無効
@@ -204,7 +259,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     // 足音再生
-    public void Play(string eventName)
+    public void Play()
     {
         audioSource.Play();
     }

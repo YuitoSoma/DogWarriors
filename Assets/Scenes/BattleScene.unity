@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -469,6 +469,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &97605192 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2815538972197604185, guid: 6c14d6fb747fbd74b980fc8e308b4a2d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5620061843933788950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &175240329
 GameObject:
   m_ObjectHideFlags: 0
@@ -3876,7 +3882,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3563c71f964fc06408d0aa57211718b8, type: 2}
+  - {fileID: 2100000, guid: 98e3d348c55e6a244b34dd502d9ed4cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4650,6 +4656,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2815538972158823598, guid: 6c14d6fb747fbd74b980fc8e308b4a2d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2815538972197604011, guid: 6c14d6fb747fbd74b980fc8e308b4a2d,
         type: 3}
       propertyPath: m_Name
@@ -4744,10 +4755,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3777883865644611851, guid: f4c141800483d664d9302ee128fb9344,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5754835847735659374, guid: f4c141800483d664d9302ee128fb9344,
         type: 3}
       propertyPath: damage
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754835848615024121, guid: f4c141800483d664d9302ee128fb9344,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6098550007209725805, guid: f4c141800483d664d9302ee128fb9344,
         type: 3}
@@ -4806,6 +4827,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6098550007209725809, guid: f4c141800483d664d9302ee128fb9344,
         type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 97605192}
+    - target: {fileID: 6098550007209725809, guid: f4c141800483d664d9302ee128fb9344,
+        type: 3}
       propertyPath: audioClip
       value: 
       objectReference: {fileID: 8300000, guid: df7087e4d8a8bb546bc08ce68632903f, type: 3}
@@ -4839,6 +4865,21 @@ PrefabInstance:
       propertyPath: hpParamater
       value: 
       objectReference: {fileID: 1336070072}
+    - target: {fileID: 6098550007209725809, guid: f4c141800483d664d9302ee128fb9344,
+        type: 3}
+      propertyPath: attackStamina
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098550007209725809, guid: f4c141800483d664d9302ee128fb9344,
+        type: 3}
+      propertyPath: defendStamina
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098550007209725809, guid: f4c141800483d664d9302ee128fb9344,
+        type: 3}
+      propertyPath: enemyDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6098550007209725816, guid: f4c141800483d664d9302ee128fb9344,
         type: 3}
       propertyPath: m_Name

@@ -298,19 +298,19 @@ AnimatorController:
     m_DefaultFloat: 5
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Hurt
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Die
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -334,7 +334,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Distance
-    m_EventTreshold: 3
+    m_EventTreshold: 2.6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2211038896783827409}
   m_Solo: 0
@@ -396,7 +396,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Distance
-    m_EventTreshold: 3
+    m_EventTreshold: 2.6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2211038896783827409}
   m_Solo: 0
@@ -487,7 +487,7 @@ AnimatorStateMachine:
     m_Position: {x: 410, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6751244198658741287}
-    m_Position: {x: 400, y: 250, z: 0}
+    m_Position: {x: 420, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2211038896783827409}
     m_Position: {x: 810, y: 100, z: 0}

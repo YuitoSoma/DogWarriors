@@ -15,6 +15,7 @@ public class EnemyManager : MonoBehaviour
     Collider axeCollider;
     Collider swordCollider;
     Collider enemyCollider;
+    Collider shieldCollider;
     EnemyUIManager enemyUIManager;
     AudioSource axeSound;
     public GameObject[] Items;
@@ -30,6 +31,7 @@ public class EnemyManager : MonoBehaviour
         battleSceneManager = GameObject.Find("BattleSceneManager").GetComponent<BattleSceneManager>();
         axeCollider = GameObject.Find("Axe").GetComponent<BoxCollider>();
         swordCollider = GameObject.Find("SwordPolyart").GetComponent<MeshCollider>();
+        shieldCollider = GameObject.Find("ShieldPolyart").GetComponent<BoxCollider>();
         enemyUIManager = transform.Find("EnemyUICanvas").gameObject.GetComponent<EnemyUIManager>();
 
         enemyCollider = GetComponent<CapsuleCollider>();
@@ -105,5 +107,10 @@ public class EnemyManager : MonoBehaviour
                 animator.SetTrigger("Hurt");
                 Damage(damager.damage);
             }
+
+        if (other == shieldCollider)
+        {
+            animator.SetTrigger("Hurt");
+        }
     }
 }
